@@ -20,7 +20,7 @@
 ?>
 	
 
-<h3>Welcome to Spambot 4000</h3>
+<h3>Welcome to Spambot 2000</h3>
 <?php
         $instance_id =
 file_get_contents("http://instance-data/latest/meta-data/instance-id");
