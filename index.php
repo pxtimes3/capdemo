@@ -20,28 +20,47 @@
 ?>
 	
 
- <h3>Welcome to Spambot 3000</h3>
-<p>Insert e-mail of spam victims:
-
+<h3>Welcome to Spambot 3000</h3>
 <?php
         $instance_id =
 file_get_contents("http://instance-data/latest/meta-data/instance-id");
-        print("Instance ID: $instance_id");
+        echo "<p> Instance ID: " . $instance_id;
 ?>
 
+<hr>
+<h4>Insert e-mail of spam victim:</h4>
+
+<form action="post.php" method="POST">
+	<div>
+		E-mail:<br>
+		<input type=text name="mail">
+		<input type=submit />
+</form>
 
 <p>Current list of spam victims:</p>
 <?php
 
-$sql = "SELECT email FROM spamVictims;
+$sql = "SELECT email FROM spamVictims";
 $result = $conn->query($sql);
 
 if($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-                echo "<p> count: " . $row["nbr"] . "<br>";
-        }
-}
+                echo $row["email"] . "<br>";
+	        }
+	}
+
+$conn->close();
+
 ?>
+
+<?php
+if ($_GET['run']) {
+	shell_exec("/var/www/html/stress.sh");
+	}
+?>
+
+
+<a href="?run=true"><img src="spam.jpg" width="200"></a>
 
 </body>
 </html>
