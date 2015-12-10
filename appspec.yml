@@ -12,6 +12,6 @@ permissions:
      type:
        - file
 hooks:
-	BeforeInstall:
-	- location: del.sh
-	  runas: root
+    BeforeInstall:
+    - location: del.sh
+      runas: root
