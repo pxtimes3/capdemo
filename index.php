@@ -41,14 +41,16 @@ file_get_contents("http://instance-data/latest/meta-data/instance-id");
 <?php
 
 $sql = "SELECT email FROM spamVictims";
-$result = $conn->query($sql);
-
-if($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-                echo $row["email"] . "<br>";
+if(!$result = $conn->query($sql)){
+	echo "spamVictims is off the grid!\n".$conn->error."\n";
+	die();
+} else {
+	if($result->num_rows > 0) {
+        	while($row = $result->fetch_assoc()) {
+                	echo $row["email"] . "<br>";
 	        }
 	}
-
+}
 $conn->close();
 
 ?>
